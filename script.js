@@ -1,6 +1,7 @@
 const turnLeftBtn = document.querySelector("#turn-left");
 const turnRightBtn = document.querySelector("#turn-right");
 const moveForwardBtn = document.querySelector("#move-forward");
+const textInput = document.querySelector("#text-direction-input");
 const submitBtn = document.querySelector("#submit-btn");
 const displayCommand = document.querySelector("#display-command");
 const outputInfo = document.querySelector("#output-info");
@@ -42,19 +43,19 @@ const directionCalc = (directionVal) => {
   }
 };
 
-const directionHandler = (input) => {
+const directionHandler = (input, leftOption, rightOption, forwardOption) => {
   switch (input) {
-    case turnLeftBtn:
+    case leftOption:
       commandString.push("left");
       rover.direction === 0 ? (rover.direction = 3) : rover.direction--;
       console.log(rover.direction);
       break;
-    case turnRightBtn:
+    case rightOption:
       commandString.push("right");
       rover.direction === 3 ? (rover.direction = 0) : rover.direction++;
       console.log(rover.direction);
       break;
-    case moveForwardBtn:
+    case forwardOption:
       commandString.push("forward");
       switch (rover.direction) {
         case 0:
@@ -87,11 +88,38 @@ const directionHandler = (input) => {
   }
 };
 
+textInput.addEventListener("keydown", () => {
+  for (let i = 0; i < buttons.length; i++) {
+    buttons[i].disabled = true;
+  }
+});
+
+const textValidationHandler = (textString) => {
+  for (let i = 0; i < textString.length; i++) {
+    if (
+      textString[i].toLowerCase() !== "l" ||
+      textString[i].toLowerCase() !== "r" ||
+      textString[i].toLowerCase() !== "m"
+    ) {
+      console.log("invalid input");
+      return;
+    }
+    outputInfo.innerHTML = "";
+    moveLimitHandler();
+    directionHandler(textString[i], l, r, m);
+    directionText.innerHTML = `Directions: ${commandString.length}`;
+    //fix outputting sixteen once limit is reached
+    displayCommand.innerHTML = "";
+    displayCommand.append(commandString);
+    console.log(commandString);
+  }
+};
+
 for (let i = 0; i < buttons.length; i++) {
   buttons[i].addEventListener("click", () => {
     outputInfo.innerHTML = "";
     moveLimitHandler();
-    directionHandler(buttons[i]);
+    directionHandler(buttons[i], turnLeftBtn, turnRightBtn, moveForwardBtn);
     directionText.innerHTML = `Directions: ${commandString.length}`;
     //fix outputting sixteen once limit is reached
     displayCommand.innerHTML = "";

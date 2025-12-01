@@ -1,12 +1,10 @@
 .movement-button,
 body {
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
-canvas {
-  height: 440px;
-  height: 440px;
-  border: solid black 0.1em;
+#text-direction-input {
+  width: 30vw;
 }
 
 .grid-container {

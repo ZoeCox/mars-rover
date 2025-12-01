@@ -9,14 +9,23 @@
     </head>
     <body>
         <h1>Rover Expedition</h1>
+        <p>Give the Rover up to 15 commands to navigate the plateau
+            <br>
+            The plateau is 10 x 10 squares and you start off at position 0, 0
+            <br>
+            You start off facing East
+        </p>
         <button class="movement-button" id="turn-left">Turn Left</button>
         <button class="movement-button" id="turn-right">Turn Right</button>
         <button class="movement-button" id="move-forward">Move Forward</button>
         <br>
         <button class="movement-button" id="submit-btn">Submit Path</button>
-        <p>Directions: </p>
+        <p id="direction-count-text">Directions: 0</p>
         <p id="display-command"></p>
         <p id="output-info"></p>
+        <div class="grid-container" id="grid"></div>
         <script type="module" src="script.js"></script>
+        <script type="module" src="roverGrid.js"></script>
+
     </body>
 </html>

@@ -2,3 +2,25 @@
 body {
   font-size: 2rem;
 }
+
+canvas {
+  height: 440px;
+  height: 440px;
+  border: solid black 0.1em;
+}
+
+.grid-container {
+  width: 80vw;
+  height: 50vh;
+  display: grid;
+  grid-template-columns: 8vw 8vw 8vw 8vw 8vw 8vw 8vw 8vw 8vw 8vw;
+  background-color: black;
+}
+
+.grid-container div {
+  background-color: #f1f1f1;
+  border: 1px solid black;
+  padding: 10px;
+  font-size: 30px;
+  text-align: center;
+}

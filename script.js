@@ -8,8 +8,6 @@ const outputInfo = document.querySelector("#output-info");
 const directionText = document.querySelector("#direction-count-text");
 const buttons = [turnLeftBtn, turnRightBtn, moveForwardBtn];
 let commandString = [];
-const plateauXCoord = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-const plateauYCoord = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 const rover = {
   positionX: 0,
@@ -98,6 +96,11 @@ const textValidationHandler = (textArr) => {
   console.log(textArr);
   for (let i = 0; i < textArr.length; i++) {
     console.log(textArr);
+    if (textArr[i] === "l") {
+      console.log("this is l");
+    } else {
+      console.log(`${textArr[i]} is not l`);
+    }
     if (textArr[i] === "l" || textArr[i] === "r" || textArr[i] === "m") {
       console.log("valid input");
     } else {

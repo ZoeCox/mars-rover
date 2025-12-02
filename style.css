@@ -1,10 +1,12 @@
 .movement-button,
 body {
-  font-size: 1.5rem;
+  font-size: 2rem;
 }
 
 #text-direction-input {
   width: 30vw;
+  height: 2rem;
+  font-size: 2rem;
 }
 
 .grid-container {

@@ -12,6 +12,10 @@
     <p>
       Give the Rover up to 15 commands to navigate the plateau
       <br />
+      You can either use the buttons to command it, or you can type directions
+      into the text field.
+      Type "L" to turn left, "R" to turn right, or "M" to move forward
+      <br>
       The plateau is 10 x 10 squares and you start off at position 0, 0
       <br />
       You start off facing East
@@ -23,14 +27,13 @@
     <input
       id="text-direction-input"
       type="text"
-      placeholder="Enter path here in, ie.L, R,M"
-    />
+      placeholder="Enter path here in, ie. LRM" />
     <br />
     <button class="movement-button" id="submit-btn">Submit Path</button>
     <p id="direction-count-text">Directions: 0</p>
     <p id="display-command"></p>
     <p id="output-info"></p>
-    <!-- <div class="grid-container" id="grid"></div> -->
+    <div class="grid-container" id="grid"></div>
     <script type="module" src="script.js"></script>
     <script type="module" src="roverGrid.js"></script>
   </body>

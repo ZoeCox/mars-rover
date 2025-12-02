@@ -94,24 +94,24 @@ textInput.addEventListener("keydown", () => {
   }
 });
 
-const textValidationHandler = (textString) => {
-  for (let i = 0; i < textString.length; i++) {
-    if (
-      textString[i].toLowerCase() !== "l" ||
-      textString[i].toLowerCase() !== "r" ||
-      textString[i].toLowerCase() !== "m"
-    ) {
-      console.log("invalid input");
+const textValidationHandler = (textArr) => {
+  console.log(textArr);
+  for (let i = 0; i < textArr.length; i++) {
+    console.log(textArr);
+    if (textArr[i] === "l" || textArr[i] === "r" || textArr[i] === "m") {
+      console.log("valid input");
+    } else {
+      alert("Invalid input, please edit and submit again");
       return;
     }
+    //check why it is flagging lrm as invalid when the condition is flipped
     outputInfo.innerHTML = "";
     moveLimitHandler();
-    directionHandler(textString[i], l, r, m);
-    directionText.innerHTML = `Directions: ${commandString.length}`;
-    //fix outputting sixteen once limit is reached
+    directionHandler(textArr[i], "l", "r", "m");
+    directionText.innerHTML = `Directions: ${textArr.length}`;
     displayCommand.innerHTML = "";
-    displayCommand.append(commandString);
-    console.log(commandString);
+    displayCommand.append(textArr);
+    console.log(textArr);
   }
 };
 
@@ -129,10 +129,17 @@ for (let i = 0; i < buttons.length; i++) {
 }
 
 submitBtn.addEventListener("click", () => {
+  let splitTextArr = textInput.value.toLowerCase().split("");
+  textValidationHandler(splitTextArr);
+  console.log(splitTextArr);
+  for (let i = 0; i < buttons.length; i++) {
+    buttons[i].disabled = false;
+  }
   commandString = [];
   displayCommand.innerHTML = "Path complete, please input more commands";
   outputInfo.innerHTML = `Rover position is ${rover.positionX},
   ${rover.positionY} and is facing ${directionCalc(rover.direction)} (${
     rover.positionX
   }:${rover.positionY}:${directionCalc(rover.direction)})`;
+  textInput.value = "";
 });

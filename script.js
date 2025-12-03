@@ -96,11 +96,6 @@ const textValidationHandler = (textArr) => {
   console.log(textArr);
   for (let i = 0; i < textArr.length; i++) {
     console.log(textArr);
-    if (textArr[i] === "l") {
-      console.log("this is l");
-    } else {
-      console.log(`${textArr[i]} is not l`);
-    }
     if (textArr[i] === "l" || textArr[i] === "r" || textArr[i] === "m") {
       console.log("valid input");
     } else {

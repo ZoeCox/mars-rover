@@ -46,7 +46,6 @@ const directionHandler = (input, leftOption, rightOption, forwardOption) => {
     case leftOption:
       commandString.push("left");
       rover.direction === 0 ? (rover.direction = 3) : rover.direction--;
-      console.log(rover.direction);
       break;
     case rightOption:
       commandString.push("right");
@@ -93,7 +92,6 @@ textInput.addEventListener("keydown", () => {
 });
 
 const textValidationHandler = (textArr) => {
-  console.log(textArr);
   for (let i = 0; i < textArr.length; i++) {
     console.log(textArr);
     if (textArr[i] === "l" || textArr[i] === "r" || textArr[i] === "m") {
@@ -119,7 +117,6 @@ for (let i = 0; i < buttons.length; i++) {
     moveLimitHandler();
     directionHandler(buttons[i], turnLeftBtn, turnRightBtn, moveForwardBtn);
     directionText.innerHTML = `Directions: ${commandString.length}`;
-    //fix outputting sixteen once limit is reached
     displayCommand.innerHTML = "";
     displayCommand.append(commandString);
     console.log(commandString);
@@ -129,7 +126,6 @@ for (let i = 0; i < buttons.length; i++) {
 submitBtn.addEventListener("click", () => {
   let splitTextArr = textInput.value.toLowerCase().split("");
   textValidationHandler(splitTextArr);
-  console.log(splitTextArr);
   for (let i = 0; i < buttons.length; i++) {
     buttons[i].disabled = false;
   }

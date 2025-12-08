@@ -87,12 +87,6 @@ const directionHandler = (input, leftOption, rightOption, forwardOption) => {
   }
 };
 
-textInput.addEventListener("keydown", () => {
-  for (let i = 0; i < buttons.length; i++) {
-    buttons[i].disabled = true;
-  }
-});
-
 const textValidationHandler = (textArr) => {
   for (let i = 0; i < textArr.length; i++) {
     if (textArr[i] !== "l" && textArr[i] !== "r" && textArr[i] !== "m") {
@@ -114,6 +108,12 @@ for (let i = 0; i < buttons.length; i++) {
     console.log(commandString);
   });
 }
+
+textInput.addEventListener("keydown", () => {
+  for (let i = 0; i < buttons.length; i++) {
+    buttons[i].disabled = true;
+  }
+});
 
 submitBtn.addEventListener("click", () => {
   let splitTextArr = textInput.value.toLowerCase().split("");

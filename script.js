@@ -3,41 +3,68 @@ const turnRightBtn = document.querySelector("#turn-right");
 const moveForwardBtn = document.querySelector("#move-forward");
 const textInput = document.querySelector("#text-direction-input");
 const submitBtn = document.querySelector("#submit-btn");
+const resetBtn = document.querySelector("#reset-btn");
 const displayCommand = document.querySelector("#display-command");
 const outputInfo = document.querySelector("#output-info");
-const directionText = document.querySelector("#direction-count-text");
 const buttons = [turnLeftBtn, turnRightBtn, moveForwardBtn];
+const acceptedTextInput = ["l", "r", "m"];
 let commandString = [];
 
 const rover = {
   positionX: 0,
   positionY: 0,
-  direction: 1,
-};
-
-const moveLimitHandler = () => {
-  if (commandString.length >= 15) {
-    alert(
-      "You have reached the maximum number of moves, please submit current moves before adding more"
-    );
-    return;
-  }
+  direction: 0,
 };
 
 const directionCalc = (directionVal) => {
   switch (directionVal) {
     case 0:
-      return "North";
+      return "N";
       break;
     case 1:
-      return "East";
+      return "E";
       break;
     case 2:
-      return "South";
+      return "S";
       break;
     case 3:
-      return "West";
+      return "W";
       break;
+  }
+};
+
+const roverCompassHandler = () => {
+  switch (rover.direction) {
+    case 0:
+      rover.positionY++;
+      if (rover.positionY === 10) {
+        rover.positionY = 0;
+      }
+      break;
+    //north handling
+    case 1:
+      rover.positionX++;
+      if (rover.positionX === 10) {
+        rover.positionX = 0;
+      }
+      break;
+    //east handling
+    case 2:
+      rover.positionY--;
+      if (rover.positionY === -1) {
+        rover.positionY = 9;
+      }
+      break;
+    //south handling
+    case 3:
+      rover.positionX--;
+      if (rover.positionX === -1) {
+        rover.positionX = 9;
+      }
+      break;
+    //west handling
+    default:
+      console.warn("Not a valid input for compass direction");
   }
 };
 
@@ -50,38 +77,13 @@ const directionHandler = (input, leftOption, rightOption, forwardOption) => {
     case rightOption:
       commandString.push("right");
       rover.direction === 3 ? (rover.direction = 0) : rover.direction++;
-      console.log(rover.direction);
       break;
     case forwardOption:
       commandString.push("forward");
-      switch (rover.direction) {
-        case 0:
-          rover.positionY--;
-          if (rover.positionY === -1) {
-            rover.positionY = 10;
-          }
-          break;
-        case 2:
-          rover.positionY++;
-          if (rover.positionY === 11) {
-            rover.positionY = 0;
-          }
-          break;
-        case 1:
-          rover.positionX++;
-          if (rover.positionX == 11) {
-            rover.positionX = 0;
-          }
-          break;
-        case 3:
-          rover.positionX--;
-          if (rover.positionX == -1) {
-            rover.positionX = 10;
-          }
-          break;
-      }
-      console.log(rover.positionX, rover.positionY);
+      roverCompassHandler();
       break;
+    default:
+      console.warn("Not a valid input for input direction");
   }
 };
 
@@ -93,30 +95,20 @@ textInput.addEventListener("keydown", () => {
 
 const textValidationHandler = (textArr) => {
   for (let i = 0; i < textArr.length; i++) {
-    console.log(textArr);
-    if (textArr[i] === "l" || textArr[i] === "r" || textArr[i] === "m") {
-      console.log("valid input");
-    } else {
-      alert("Invalid input, please edit and submit again");
-      return;
+    if (textArr[i] !== "l" && textArr[i] !== "r" && textArr[i] !== "m") {
+      textArr.splice(i, 1);
+      console.warn("Invalid input detected and has been removed");
     }
-    //check why it is flagging lrm as invalid when the condition is flipped
     outputInfo.innerHTML = "";
-    moveLimitHandler();
     directionHandler(textArr[i], "l", "r", "m");
-    directionText.innerHTML = `Directions: ${textArr.length}`;
     displayCommand.innerHTML = "";
-    displayCommand.append(textArr);
-    console.log(textArr);
   }
 };
 
 for (let i = 0; i < buttons.length; i++) {
   buttons[i].addEventListener("click", () => {
     outputInfo.innerHTML = "";
-    moveLimitHandler();
     directionHandler(buttons[i], turnLeftBtn, turnRightBtn, moveForwardBtn);
-    directionText.innerHTML = `Directions: ${commandString.length}`;
     displayCommand.innerHTML = "";
     displayCommand.append(commandString);
     console.log(commandString);
@@ -136,4 +128,8 @@ submitBtn.addEventListener("click", () => {
     rover.positionX
   }:${rover.positionY}:${directionCalc(rover.direction)})`;
   textInput.value = "";
+});
+
+resetBtn.addEventListener("click", () => {
+  location.reload();
 });

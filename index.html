@@ -10,13 +10,16 @@
   <body>
     <h1>Rover Expedition</h1>
     <p>
-      Give the Rover up to 15 commands to navigate the plateau
+      Give the Rover commands to navigate the plateau
       <br />
       You can either use the buttons to command it, or you can type directions
       into the text field.
       Type "L" to turn left, "R" to turn right, or "M" to move forward
       <br>
-      The plateau is 10 x 10 squares and you start off at position 0, 0
+      Other commands will not result in instruction to the Rover
+      <br>
+      The plateau is 10 x 10 squares and you start off at position 0, 0 in the
+      bottom left hand corner of the plateau
       <br />
       You start off facing East
     </p>
@@ -30,7 +33,9 @@
       placeholder="Enter path here in, ie. LRM" />
     <br />
     <button class="movement-button" id="submit-btn">Submit Path</button>
-    <p id="direction-count-text">Directions: 0</p>
+    <button class="movement-button" id="reset-btn">Reset Rover
+      Position</button>
+
     <p id="display-command"></p>
     <p id="output-info"></p>
     <!-- <div class="grid-container" id="grid"></div> -->
